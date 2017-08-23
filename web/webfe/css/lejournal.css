@@ -1,0 +1,251 @@
+body {
+    font: 100%/1.2 Georgia, "Times New Roman", serif;
+    margin: 0;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #212121;
+    font-family: "Lato", sans-serif;
+    font-size: 2.25em; /*36px/16px*/
+    font-weight: 300;
+    letter-spacing: -2px;
+    line-height: .975;
+    margin-bottom: .4125em; /*21.45px*/
+}
+
+.page {
+    max-width: 60em; /* 60 * 16 = 960px */
+    /*border: 1px solid #848484;*/
+    margin: 0 auto;
+    /*background: #f5f5f5;*/
+    /*overflow: hidden;*/
+}
+
+.about h2,
+.mod h2 {
+    font-size: .875em;
+}
+
+.logo,
+.social-sites,
+.nav-main li {
+    text-align: center;
+}
+
+.post-photo,
+.post-photo-full,
+.about img,
+.map {
+    max-width: 100%;
+}
+
+.nav-main a {
+    color: #292929;
+    display: inline-block;
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.125em;
+    font-weight: 700;
+    padding: .5em 1.15em .5em 1.4em;
+    text-transform: uppercase;
+}
+
+.social-sites li {
+    display: inline-block;
+    font-family: "Open Sans", sans-serif;
+}
+
+.pagination li {
+    display: inline-block;
+    list-style: none;
+}
+
+.nav-main li,
+.social-sites li,
+.links {
+    list-style: none;
+    margin: 0;
+}
+
+.about {
+    background: #2b2b2b;
+    background: linear-gradient(to top, #2b2b2b, #fff);
+    border-radius: 10px;
+    padding: .3125em .625em .625em;
+    color: #d8d8d8;
+    box-shadow: 3px 3px 10px #555555;
+    opacity: 1;
+}
+
+.about img {
+    border: 5px solid #bebebe;
+    border-radius: 15px;
+}
+
+@font-face {
+    font-family: 'Social Icons';
+    src: url("font/socialico-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.social-sites a {
+    color: #019443;
+    font-family: 'Social Icons', sans-serif;
+    font-size: 46px;
+    line-height: .8;
+    vertical-align: middle;
+    text-decoration: none;
+}
+
+/**
+more后面增加>>
+ */
+.more:after {
+    content: " >>";
+}
+
+.travels {
+    /* 让位于其中的.cities可以使用绝对定位 */
+    position: relative;
+}
+
+.map:focus + .cities,
+.map:hover + .cities {
+    left: 50%; /* 显示 */
+}
+
+/* 气泡 */
+.cities {
+    list-style: none;
+    background: #2B2B2B;
+    border-radius: 5px 5px;
+    left: -999em; /* 隐藏 */
+    margin-left: -111px;
+    color: white;
+    padding: .5em 0 .9375em .9375em;
+    position: absolute;
+    top: -75px;
+    width: 222px;
+}
+
+/* 气泡下的三角形 */
+.cities:after {
+    border: solid transparent;
+    border-top-color: #2b2b2b;
+    border-width: 15px;
+    content: " "; /* 空格 */
+    height: 0;
+    left: 50%;
+    margin-left: -15px;
+    position: absolute;
+    top: 99.9%;
+    width: 0;
+}
+
+/*
+ 20em (>=320px)
+*/
+@media only screen and (min-width: 20em) {
+    .nav-main li {
+        border-left: 1px solid #c8c8c8;
+        display: inline-block;
+        text-align: left;
+    }
+
+    .nav-main li:first-child {
+        border-left: none;
+    }
+
+    .nav-main a {
+        display: inline-block;
+        font-size: 1em;
+        padding: .5em .9em .5em 1.15em;
+    }
+}
+
+/*
+30em (>=480px)
+*/
+
+@media only screen and (min-width: 30em) {
+    .masthead {
+        position: relative;
+    }
+
+    .social-sites {
+        position: absolute;
+        right: -3px;
+        top: 40px;
+    }
+
+    .logo {
+        margin-bottom: 8px;
+        text-align: left;
+    }
+
+    .nav-main {
+        margin-top: 0;
+    }
+
+    .post-photo {
+        float: left;
+        margin-bottom: 2px;
+        margin-right: 22px;
+        max-width: 61.667%;
+    }
+
+    .post-footer {
+        clear: left;
+    }
+}
+
+/*
+ 30em - 47.9375em (480px - 768px)
+*/
+@media only screen and(min-width: 30em) and (max-width: 47.9375em ) {
+    .about { /*self clear float*/
+        overflow: hidden;
+    }
+
+    .about img {
+        float: left;
+        margin-right: 15px;
+    }
+
+}
+
+.footer {
+    clear: both;
+}
+
+/**
+48em (>= 768px)
+ */
+@media only screen and (min-width: 48em) {
+
+    .container {
+        background: url("../img/bg.png") repeat-y 65.9375% 0;
+        padding-bottom: 1.875em;
+    }
+
+    main {
+        float: left;
+        width: 62.5%;
+    }
+
+    .sidebar {
+        float: right;
+        margin-top: 1.875em;
+        width: 31.25%;
+    }
+
+    .nav-main {
+        margin-bottom: 0;
+    }
+}

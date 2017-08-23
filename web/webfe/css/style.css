@@ -1,0 +1,46 @@
+/**
+祖先选择器，选择class="architect"中所有子孙的p元素
+ */
+.architect > p {
+
+}
+
+/**
+相邻同胞选择器，同一父元素的同胞选择第一个p元素后相邻的所有p元素
+需要直接相邻
+ */
+.architect p + p {
+
+}
+
+/**
+同胞选择器,同一父元素的同胞 选择第一个p元素后所有的p元素
+不需要直接相邻
+ */
+.architect p ~ p {
+    color: greenyellow;
+}
+
+/**
+选择作为父元素的第一个子元素的 li 元素
+伪类（pseudo-class）则应用于一组 HTML 元素，而你无需在 HTML 代码中用
+类标记它们。例如，使用 :first-child 可以选择某元素的第一个子元素，你就不用写成
+class="first-child"
+ */
+li:first-child {
+    color: indianred;
+}
+
+p::first-letter {
+    color: teal;
+    font-size: 1.4em; /* make letter larger */
+    font-weight: bold;
+}
+
+body {
+    background-color: black;
+    background-image: url("../img/sky.png");
+    background-repeat: repeat-x;
+    background-attachment: fixed;
+    background-position: left bottom;
+}

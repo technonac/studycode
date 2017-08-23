@@ -1,0 +1,8 @@
+body {
+    background: #e5e5e5;
+}
+
+.login-container {
+    max-width: 350px;
+    margin: 5em auto 0;
+}

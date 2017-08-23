@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.js"></script>
+    <script src="script.js"></script>
+</head>
+<script>
+    window.onload = writeMessage;
+
+    function writeMessage() {
+        document.getElementById('helloMessage').innerHTML = "Hello world!"
+    }
+
+    function confirm_some() {
+        if (confirm("Are you sure you want to do that?")) {
+            alert("You said yes");
+        }
+        else {
+            alert("You said no");
+        }
+    }
+
+    function prompt_some() {
+        var ans = prompt("Are you sure you want to do that?", "");
+        if (ans) {
+            alert("You said " + ans);
+        }
+        else {
+            alert("You refused to answer");
+        }
+    }
+</script>
+<script src="script.js"></script>
+<body>
+<div id="helloMessage"></div>
+<input type="button" id="confirm-btn" onclick="confirm_some()" value="confirm"/>
+<input type="button" id="prompt-btn" onclick="prompt_some()" value="prompt"/>
+<input type="button" id="test-btn" onclick="window_test()" value="window_test"/>
+<input type="button" id="loc-btn" onclick="location_test()" value="location_test"/>
+<input type="button" id="nav-btn" onclick="navigator_test()" value="navigator_test"/>
+<input type="button" id="scr-btn" onclick="screen_test()" value="screen_test"/>
+<input type="button" id="his-btn" onclick="history_test()" value="history_test"/>
+
+<p id="show_something"></p>
+</body>
+</html>

@@ -1,0 +1,207 @@
+.social-sites li {
+    display: inline;
+}
+
+/**
+设置为inline的元素会忽略任何width、height、margin-top 和margin-bottom设置。
+不过，设置为 inline-block 的元素可以使用这些属性，如这里的 em 可以设置 width。
+ */
+.nav-main li {
+    border-left: 1px solid #c8c8c8;
+    display: inline-block;
+}
+
+.nav-main li:first-child {
+    border-left: none;
+}
+
+.nav-main a {
+    color: #292929;
+    display: inline-block;
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.125em;
+    font-weight: 700;
+    padding: .5em 1.15em .5em 1.4em;
+    text-transform: uppercase;
+}
+
+.nav-main {
+    border-top: 5px solid #019443;
+    border-bottom: 1px solid #c8c8c8;
+    padding: .45em 0 .5em;
+
+}
+
+main {
+    float: left;
+    width: 600px; /* 62.5% = 600px / 960px */
+}
+
+.sidebar {
+    float: right;
+    margin-top: 1.875em; /* 30px/16px*/
+    width: 300px; /*31.25%=300px/960px*/
+}
+
+/** {*/
+/*-webkit-box-sizing: border-box;*/
+/*-moz-box-sizing: border-box;*/
+/*box-sizing: border-box;*/
+/*}*/
+
+.page {
+    width: 960px;
+    border: 1px solid #848484;
+    margin: 0 auto;
+    /*background: #f5f5f5;*/
+    overflow: hidden;
+}
+
+/*
+跟padding: 5px 10px 10px;
+是一样的，因为字体大小是16px，且
+.3125 = 5px/16px
+.625 = 10px/16px
+*/
+.about {
+    background: #2b2b2b;
+    padding: .3125em .625em .625em;
+    color: #d8d8d8;
+}
+
+.about img {
+    border: 5px solid #bebebe;
+}
+
+.links {
+    padding-left: 0;
+    width: 270px;
+    list-style: none;
+}
+
+.about h2,
+.mod h2 {
+    font-size: 0.875em;
+}
+
+.about h2,
+.mod h2,
+.nav-main a {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.mod h2 {
+    border-bottom: 1px solid #dbdbdb;
+    padding-bottom: 0.75em;
+}
+
+.footer p {
+    font-size: 0.6875em;
+}
+
+.post-footer {
+    border-bottom: 1px solid #dbdbdb;
+    border-top: 1px solid #dbdbdb;
+    padding-top: .75em;
+    padding-bottom: .75em;
+}
+
+h1 {
+    color: #212121;
+    font-family: "Lato", sans-serif;
+    font-size: 3.25em; /*36px/16px*/
+    font-weight: 300;
+    letter-spacing: -2px;
+    line-height: .975;
+    margin-bottom: .4125em; /*21.45px*/
+}
+
+.map {
+    margin: 1.4375em 0 .8125em;
+    /* 23px 0 13px*/
+}
+
+.links {
+    margin: 1.5em 0 4.125em;
+    padding: 0;
+}
+
+.links li {
+    margin-bottom: 1.1em;
+}
+
+.post-photo {
+    float: left;
+    margin-bottom: 2px;
+    margin-right: 22px;
+}
+
+.post-footer {
+    clear: left;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.pagination li {
+    list-style: none;
+    display: inline-block;
+}
+
+/*
+撑开浮动元素的父元素的布局
+*/
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.container {
+    background: url(../img/bg.png) repeat-y 629px 0;
+    padding-bottom: 1.9375em;
+    /*border: 1px solid indianred;*/
+
+}
+
+footer[role="contentinfo"] {
+    border-top: 1px solid #cacbcb;
+}
+
+.masthead {
+    position: relative;
+}
+
+.masthead .social-sites {
+    position: absolute;
+    top: 41px;
+    right: 0;
+}
+
+.nav-main .current-page,
+.nav-main .current-page:hover {
+    color: #747474;
+    cursor: default;
+}
