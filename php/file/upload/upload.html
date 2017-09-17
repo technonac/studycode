@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>单文件上传</title>
 </head>
 <body>
-$END$
+<!-- The data encoding type, enctype, MUST be specified as below -->
+<form action="upload_raw.php" method="post" enctype="multipart/form-data">
+    <!-- MAX_FILE_SIZE must precede the file input field -->
+    <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+    <!-- Name of input element determines name in $_FILES array -->
+    选择文件:<input type="file" name="myfile"><br>
+    <input type="submit" value="上传文件"><br>
+</form>
+
 </body>
 </html>
