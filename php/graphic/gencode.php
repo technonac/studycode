@@ -1,7 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nonac
- * Date: 2017/9/17
- * Time: 22:10
- */
+session_start();
+require_once('vcode.class.php');
+echo new VCode();
