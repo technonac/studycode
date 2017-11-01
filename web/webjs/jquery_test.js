@@ -2,9 +2,10 @@
  * Created by and on 2017/6/16.
  */
 $(document).ready(function () {
-    // $('#tips').hide();
+
 
     console.log("ready!!!");
+
     $('#submit').click(function () {
         if ($('#user').val() == "" || $('#pwd').val() == "") {
             $('#tips').text("请输入用户名/密码 ");

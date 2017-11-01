@@ -17,8 +17,49 @@ $(function () {
 
 });
 
-
 $(document).ready(function () {
+    /*
+     $('#switcher-default').addClass('selected')
+     .on('click', function () {
+     $('body').removeClass('narrow').removeClass('large');
+
+     });
+
+     $('#switcher-narrow').on('click', function () {
+     $('body').addClass('narrow').removeClass('large');
+     });
+
+     $('#switcher-large').on('click', function () {
+     $('body').removeClass('narrow').addClass('large');
+     });
+
+     $('#switcher button').on('click', function () {
+     $('#switcher button').removeClass('selected');
+     $(this).addClass('selected');
+     });
+     */
+
+    //简写
+    $('#switcher-default').addClass('selected');
+    $('#switcher button').click(function () {
+        var bodyClass = this.id.split('-')[1];
+        $('body').removeClass().addClass(bodyClass);
+        $('#switcher button').removeClass('selected');
+        $(this).addClass('selected');
+    });
+
+    $('#switcher').click(function (event) {
+        //现在，单击按钮不会再折叠样式转换器，而单击转换器背景区则会触发折叠操作
+        if (event.target == this) {
+            $('#switcher button').toggleClass('hidden');
+        }
+    });
+
+    $('#switcher h3').hover(function () {
+        $(this).addClass('hover');
+    }, function () {
+        $(this).removeClass('hover');
+    });
 
 });
 

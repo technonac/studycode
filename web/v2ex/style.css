@@ -1,25 +1,35 @@
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
+html, body {
+    height: 100%;
     background-color: #e2e2e2;
     font-size: 14px;
-    margin-bottom: 100px;
 }
 
-.footer {
+#page {
+    min-height: 100%;
+    position: relative;
+}
+
+#header {
+
+}
+
+#main-container {
+    padding-bottom: 100px;
+}
+
+#footer {
     height: 80px;
     width: 100%;
     position: absolute;
+    bottom: 0;
+    left: 0;
     padding: 20px 20px;
     color: #999;
     background-color: #f9f9f9;
     border-top: 1px solid #e5e5e5;
 }
 
-.footer li a {
+#footer li a {
     text-decoration: solid;
     color: #5e5e5e;
 }
