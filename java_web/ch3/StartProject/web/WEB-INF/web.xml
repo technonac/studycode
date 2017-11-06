@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <servlet>
+        <servlet-name>FirstServlet</servlet-name>
+        <servlet-class>com.example.FirstServlet</servlet-class>
+
+        <!--通过getServletContext().getInitParam()获取-->
+        <init-param>
+            <param-name>message</param-name>
+            <param-value>welcome to FirstServlet</param-value>
+        </init-param>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+        <!-- 1:tomcat在启动时加载该servlet 0:会在有人第一次请求该servlet时加载 -->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!-- 配置servlet的访问方式-->
+    <servlet-mapping>
+        <servlet-name>FirstServlet</servlet-name>
+        <url-pattern>/servlet/FirstServlet</url-pattern>
+        <url-pattern>/servlet/FirstServlet.do</url-pattern>
+        <url-pattern>/servlet/FirstServlet.php</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReqServlet</servlet-name>
+        <servlet-class>com.example.ReqServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ReqServlet</servlet-name>
+        <url-pattern>/servlet/ReqServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CaptchaServlet</servlet-name>
+        <servlet-class>com.example.CaptchaServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CaptchaServlet</servlet-name>
+        <url-pattern>/servlet/CaptchaServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReadParamServlet</servlet-name>
+        <servlet-class>com.example.ReadParamServlet</servlet-class>
+        <init-param>
+            <param-name>hello</param-name>
+            <param-value>world</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ReadParamServlet</servlet-name>
+        <url-pattern>/servlet/ReadParamServlet</url-pattern>
+    </servlet-mapping>
+</web-app>
