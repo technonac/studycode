@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Upload File</title>
+</head>
+<body>
+<form action="servlet/UploadServlet" method="post" enctype="multipart/form-data">
+    <div>
+        <span>上传文件1 ==> </span><input type="file" name="file1">
+    </div>
+    <div>
+        <span>上传文件2 ==> </span><input type="file" name="file2">
+    </div>
+    <div>
+        <span>文件说明1 ==> </span><input type="text" name="desc1">
+    </div>
+    <div>
+        <span>文件说明2 ==> </span><input type="text" name="desc2">
+    </div>
+    <div>
+        <input type="submit" value="提交">
+    </div>
+</form>
+</body>
+</html>

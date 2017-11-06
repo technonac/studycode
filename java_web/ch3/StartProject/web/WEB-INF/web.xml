@@ -4,6 +4,26 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+    <!-- 上下文参数，所有servlet可用-->
+    <context-param>
+        <param-name>upload folder</param-name>
+        <param-value>attachment</param-value>
+    </context-param>
+
+    <!-- 资源注入代码 -->
+    <env-entry>
+        <env-entry-name>hello</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>Hello ,This is a resource inject string.</env-entry-value>
+    </env-entry>
+
+    <env-entry>
+        <env-entry-name>i</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>23333</env-entry-value>
+    </env-entry>
+
+
     <servlet>
         <servlet-name>FirstServlet</servlet-name>
         <servlet-class>com.example.FirstServlet</servlet-class>
@@ -53,7 +73,7 @@
         <servlet-name>ReadParamServlet</servlet-name>
         <servlet-class>com.example.ReadParamServlet</servlet-class>
         <init-param>
-            <param-name>hello</param-name>
+            <param-name>initParamName</param-name>
             <param-value>world</param-value>
         </init-param>
     </servlet>
@@ -61,5 +81,14 @@
     <servlet-mapping>
         <servlet-name>ReadParamServlet</servlet-name>
         <url-pattern>/servlet/ReadParamServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UploadServlet</servlet-name>
+        <servlet-class>com.example.UploadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadServlet</servlet-name>
+        <url-pattern>/servlet/UploadServlet</url-pattern>
     </servlet-mapping>
 </web-app>
