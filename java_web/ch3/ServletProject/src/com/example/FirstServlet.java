@@ -1,5 +1,7 @@
 package com.example;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -8,8 +10,39 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class FirstServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        log("exec doPost()");
+
+    //servlet的生命周期
+    @PostConstruct
+    public void postCon() {
+        System.out.println("exec PostConstruct()");
+    }
+
+    @Override
+    public void init() throws ServletException {
+        System.out.println("exec init()");
+        super.init();
+    }
+
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("exec service()");
+        super.service(req, resp);
+    }
+
+    @PreDestroy
+    public void preDes() {
+        System.out.println("exec PreDestroy()");
+    }
+
+    @Override
+    public void destroy() {
+        System.out.println("exec destroy()");
+        super.destroy();
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+            IOException {
+        System.out.println("exec doPost()");
         execute(request, response);
     }
 
@@ -21,8 +54,9 @@ public class FirstServlet extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        log("exec doGet()");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+            IOException {
+        System.out.println("exec doGet()");
         execute(request, response);
     }
 
@@ -35,7 +69,7 @@ public class FirstServlet extends HttpServlet {
      */
     @Override
     protected long getLastModified(HttpServletRequest req) {
-        log("exec getLastModified()");
+        System.out.println("exec getLastModified()");
         return super.getLastModified(req);
     }
 
@@ -46,6 +80,7 @@ public class FirstServlet extends HttpServlet {
         String requestURI = request.getRequestURI();
         String method = request.getMethod();
         String param = request.getParameter("param");
+        String referer = request.getHeader("referer");
 
         response.setContentType("text/html");
 
@@ -56,6 +91,7 @@ public class FirstServlet extends HttpServlet {
         out.println("request requestURI = " + requestURI + "<br/>");
         out.println("request method = " + method + "<br/>");
         out.println("request param = " + param + "<br/>");
+        out.println("referer = " + referer + "<br/>");
         out.println("<script>document.write('本页面最后更新时间: ' + document.lastModified);</script");
         out.println("</body>");
         out.println("</html>");
