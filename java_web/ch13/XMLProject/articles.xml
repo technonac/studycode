@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<articles>
+    <article category="xml">
+        <title>xml book</title>
+        <author>tom</author>
+        <email>tom@tom.com</email>
+        <date>20170101</date>
+    </article>
+    <article category="java">
+        <title>java book</title>
+        <author>cat</author>
+        <email>cat@cat.com</email>
+        <date>20170202</date>
+    </article>
+</articles>

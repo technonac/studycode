@@ -23,8 +23,9 @@
         //获取statement, 该对象用于执行sql,相当于控制台
         statement = conn.createStatement();
 
+        String sql = "SELECT * FROM tb_person ORDER BY id";
         //使用statement对象执行select返回结果集
-        rs = statement.executeQuery("SELECT * FROM tb_person ORDER BY id");
+        rs = statement.executeQuery(sql);
 %>
 <html>
 <head>
