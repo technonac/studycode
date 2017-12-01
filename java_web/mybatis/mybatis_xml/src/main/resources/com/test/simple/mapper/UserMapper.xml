@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--
+ 当Mapper接口与xml关联的时候，命名空间namespace= Mapper接口的全限定名称
+
+ 当只使用xml而不使用接口时，namespace的值可以设置为任意不重复的名称
+ -->
+<mapper namespace="com.test.simple.mapper.UserMapper">
+    <!-- 配置java对象的属性和查询结果列的对应关系
+        id:在select标签中，resultMap指定的值即为此处id所设置值
+        type:用于配置查询列所映射到的java对象类型
+        extends :配置当前的resultMap继承自其它的resultMap
+        autoMapping:配置是否启用非映射字段（没有在resultMapp中配置的字段）的自动映射功能
+        该配置可以覆盖全局的autoMappingBehavior配置
+
+        resultMap属性:
+        constructor:配置使用构造方法注入结果,包含两个子标签
+         * idArg:id参数，标记结果为id，可以保住提高整体性能
+         * arg: 注入到构造方法的一个普通结果
+        id:一个id结果，标记结果为id
+        result:注入到java对象属性的普通结果
+        association:一个复杂的类型关联，许多结果将包成这种类型
+        collection:复杂的类型的集合
+        discriminator: 根据结果值来决定使用哪个结果映射
+
+        id和result标签包含的属性相同，不同在于id代表的是主键(或唯一值),他们的属性值是通过setter方法注入的
+
+        column:数据库的列名
+        property:映射到结果的属性,可以映射一些复杂对象的属性,如address.street.number
+        javaType:一个java类的完全限定名，或者一个类型的别名(通过typeAlias配置或者默认的类型)
+        如果映射到一个JavaBean,MyBatis通常可以自动判断属性的类型，如果映射到HashMap，则需要指定javaType属性
+        jdbcType:列对应的数据库类型，仅需要对插入，更新，删除操作可能为空的列进行处理
+        typeHandler:使用这个属性可以覆盖默认的类型处理器，这个属性值是类的完全限定名或者类型别名。
+    -->
+    <resultMap id="userMap" type="com.test.simple.model.SysUser">
+        <id property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="userPassword" column="user_password"/>
+        <result property="userEmail" column="user_email"/>
+        <result property="userInfo" column="user_info"/>
+        <result property="headImg" column="head_img" jdbcType="BLOB"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <!--
+    id:命名空间中的唯一标识符, id要与Mapper接口中的方法一致-->
+    <!-- select映射查询语句使用的标签 -->
+    <select id="selectById" resultMap="userMap">
+        SELECT * FROM sys_user WHERE id = #{id}
+    </select>
+
+    <!--mapUnderscoreToCamelCase 默认为false,需要指定别名来映射-->
+    <!-- <select id="selectAll" resultType="com.test.simple.model.SysUser">
+         SELECT id,
+         user_name userName,
+         user_password userPassword,
+         user_email userEmail,
+         user_info userInfo,
+         head_img headImg,
+         create_time createTime
+         FROM sys_user
+
+     </select>-->
+    <select id="selectAll" resultType="com.test.simple.model.SysUser">
+        SELECT id,
+        user_name,
+        user_password,
+        user_email,
+        user_info,
+        head_img,
+        create_time
+        FROM sys_user
+    </select>
+    <select id="selectRoleByUserId" resultType="com.test.simple.model.SysRole">
+        SELECT
+        r.id,
+        r.role_name roleName,
+        r.create_time createTime,
+        u.user_name as "user.userName",
+        u.user_email as "user.userEmail"
+        FROM sys_user u
+        INNER JOIN sys_user_role ur ON u.id=ur.user_id
+        INNER JOIN sys_role r ON ur.role_id = r.id
+        WHERE u.id= #{userId}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_user(
+        id,user_name,user_password,user_email,
+        user_info,head_img,create_time)
+        VALUES (
+        #{id},#{userName},#{userPassword},#{userEmail},
+        #{userInfo},#{headImg,jdbcType=BLOB},
+        #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <!--
+    useGeneratedKeys:默认为false,置为true时，MyBatis会使用JDBC的getGeneratedKeys
+    方法来取出数据库内部生成的主键
+
+    keyProperty:通过getGeneratedKeys获取主键值后将要赋值的属性名,
+    如果希望得到多个数据库生成的列，属性值也可以是以逗号分隔的属性名称列表
+    -->
+    <insert id="insert2" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO sys_user(
+        user_name,user_password,user_email,
+        user_info,head_img,create_time)
+        VALUES (
+        #{userName},#{userPassword},#{userEmail},
+        #{userInfo},#{headImg,jdbcType=BLOB},
+        #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <!--
+    使用selectKey标签来获取主键的值，适用于不提供主键自增功能的数据库,也适用于主键自增的
+    -->
+    <insert id="insert3">
+        INSERT INTO sys_user(
+        user_name,user_password,user_email,
+        user_info,head_img,create_time)
+        VALUES (
+        #{userName},#{userPassword},#{userEmail},
+        #{userInfo},#{headImg,jdbcType=BLOB},
+        #{createTime,jdbcType=TIMESTAMP})
+        <selectKey keyColumn="id" resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <update id="updateById">
+      UPDATE sys_user
+      SET user_name = #{userName},
+      user_password = #{userPassword},
+      user_email = #{userEmail},
+      user_info = #{userInfo},
+      head_img = #{headImg,jdbcType=BLOB},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+      WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM sys_user WHERE id=#{id}
+    </delete>
+
+    <!--
+    where标签:如果该标签包含的元素中有返回值，就插入一个where,如果where后面的
+    字符串是以and和or开头的，就将他们剔除
+    -->
+    <select id="selectByUser" resultType="com.test.simple.model.SysUser">
+        SELECT id,
+        user_name userName,
+        user_password userPassword,
+        user_email userEmail,
+        user_info userInfo,
+        head_img headImg,
+        create_time createTime
+        FROM sys_user
+        <where>
+            <if test="userName != null and userName != ''">
+                <!--AND user_name LIKE concat('%',#{userName},'%') -->
+                <!--
+                 bind标签可以使用OGNL表达式创建一个变量,并将其绑定到上下文中
+                -->
+                <bind name="userNameLike" value="'%' + useName + '%'"/>
+                AND user_name LIKE #{userNameLike}
+            </if>
+            <if test="userEmail != null and userEmail != ''">
+                AND user_email = #{userEmail}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByIdOrUserName" resultType="com.test.simple.model.SysUser">
+        SELECT id,
+        user_name userName,
+        user_password userPassword,
+        user_email userEmail,
+        user_info userInfo,
+        head_img headImg,
+        create_time createTime
+        FROM sys_user
+        <where>
+            <choose>
+                <when test="id != null">
+                    and id=#{id}
+                </when>
+                <when test="userName != null and userName != ''">
+                    and user_name=#{userName}
+                </when>
+                <otherwise>
+                    and 1=2
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <select id="selectByIdList" resultType="com.test.simple.model.SysUser">
+        SELECT id,
+        user_name userName,
+        user_password userPassword,
+        user_email userEmail,
+        user_info userInfo,
+        head_img headImg,
+        create_time createTime
+        FROM sys_user
+        WHERE id IN
+        <!--
+        collection:要迭代循环的属性名
+        item:迭代对象中取出的每一个值
+        index:索引的属性名，在集合数组情况下值为当前索引值,当迭代循环的对象是Map类型是,这个值为Map的key值
+        open:整个循环内容开头的字符串
+        close:循环内容结尾的字符串
+        separator:每次循环的分隔符
+         -->
+        <foreach collection="list" open="(" close=")" separator="," item="id" index="i">
+            #{id}
+        </foreach>
+    </select>
+
+
+    <insert id="insertList" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO sys_user(
+        user_name,user_password,user_email,
+        user_info,head_img,create_time)
+        VALUES
+        <foreach collection="list" item="user" separator=",">
+            (
+            #{user.userName},#{user.userPassword},#{user.userEmail},
+            #{user.userInfo},#{user.headImg,jdbcType=BLOB},
+            #{user.createTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <update id="updateByMap">
+        UPDATE sys_user
+        SET
+        <foreach collection="_parameter" item="val" index="key" separator=",">
+            ${key} = #{val}
+        </foreach>
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectUserAndRoleById" resultType="com.test.simple.model.SysUser">
+       select
+		   	u.id,
+		   	u.user_name userName,
+		    u.user_password userPassword,
+		    u.user_email userEmail,
+		    u.user_info userInfo,
+		    u.head_img headImg,
+		    u.create_time createTime,
+			r.id "role.id",
+			r.role_name "role.roleName",
+			r.enabled "role.enabled",
+			r.create_by "role.createBy",
+			r.create_time "role.createTime"
+		from sys_user u
+		inner join sys_user_role ur on u.id = ur.user_id
+		inner join sys_role r on ur.role_id = r.id
+		where u.id = #{id}
+    </select>
+
+    <resultMap id="userRoleMap" extends="userMap" type="com.test.simple.model.SysUser">
+        <!-- role相关的属性
+        重名的列名增加了role_前缀
+         -->
+        <association property="role" columnPrefix="role_" javaType="com.test.simple.model.SysRole">
+            <result property="id" column="role_id"/>
+            <result property="roleName" column="role_name"/>
+            <result property="enabled" column="enabled"/>
+            <result property="createBy" column="create_by"/>
+            <result property="createTime" column="role_create_time" jdbcType="TIMESTAMP"/>
+        </association>
+    </resultMap>
+    <select id="selectUserAndRoleById2" resultMap="userRoleMap">
+        select
+        u.id,
+        u.user_name ,
+        u.user_password ,
+        u.user_email ,
+        u.user_info ,
+        u.head_img ,
+        u.create_time ,
+        r.id role_id,
+        r.role_name ,
+        r.enabled enabled,
+        r.create_by create_by,
+        r.create_time role_create_time
+        from sys_user u
+        inner join sys_user_role ur on u.id = ur.user_id
+        inner join sys_role r on ur.role_id = r.id
+        where u.id = #{id}
+    </select>
+</mapper>
